@@ -129,15 +129,15 @@ def main():
             print(f'WARNING: skipping {name}: {dep}')
             continue
         else:
-            if archive_url is None:
-                dep_url = dep['url']
-                if '@' in dep_url:
-                    repo, ref = dep['url'].split('@')
-                else:
-                    assert name == 'sdk', (name, dep)
-                    repo = dep_url
-                    ref = args.master_ref
+            dep_url = dep['url']
+            if '@' in dep_url:
+                repo, ref = dep['url'].split('@')
+            else:
+                assert name == 'sdk', (name, dep)
+                repo = dep_url
+                ref = args.master_ref
 
+        if archive_url is None:
             archive_url = f'{repo}/+archive/{ref}.tar.gz'
 
         escaped_name = name.replace('/', '_')
