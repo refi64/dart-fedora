@@ -6,10 +6,14 @@ Release: 1%{?dist}
 Summary: The Dart Programming Language
 
 License: BSD-3-Clause
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: git
 BuildRequires: gperftools-devel
 BuildRequires: libicu-devel
 BuildRequires: ninja-build
 BuildRequires: python2
+BuildRequires: zlib-devel
 
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 
@@ -402,6 +406,8 @@ mv %{_builddir}/deps/sdk_tools_idl_parser %{_builddir}/sdk/tools/idl_parser
 mkdir -p %{_builddir}/sdk/tools/sdks
 mv %{_builddir}/deps/sdk_tools_sdks_dart-sdk/dart-sdk %{_builddir}/sdk/tools/sdks/dart-sdk
 
+sed -i 's/sys.stderr.write(str(inst))/raise/' tools/make_version.py
+
 # Auto-detect the architecture.
 sed -i "s/default='x64'/default=HOST_ARCH/" tools/gn.py
 
@@ -499,6 +505,10 @@ config("sdk") {
 config("executable_config") {}
 EOF
 
+# Force the use of Python 2.
+echo 'script_executable = "python2"' >> .gn
+sed -i 's/python$suffix/python2/' utils/compiler/create_snapshot_entry.dart
+
 %build
 %set_build_flags
 export CC=gcc
@@ -518,8 +528,8 @@ export DART_GN_ARGS=
 DART_GN_ARGS+=' dart_version_git_info=false'
 DART_GN_ARGS+=' dart_use_debian_sysroot=false'
 DART_GN_ARGS+=' dart_component_kind="shared_library"'
-tools/gn.py -m product --no-clang --no-goma
-tools/build.py -m product create_sdk
+python2 tools/gn.py -m product --no-clang --no-goma
+python2 tools/build.py -m product create_sdk
 
 %install
 rm -rf %{buildroot}

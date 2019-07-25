@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 
+import os
 import shutil
 
+
+os.chdir(os.path.dirname(__file__))
+
+try:
+    os.mkdir('scratch')
+except FileExistsError:
+    pass
 
 with open('dart-uber.spec', 'w') as uber:
     with open('dart.spec') as source:
@@ -12,3 +20,5 @@ with open('dart-uber.spec', 'w') as uber:
                     shutil.copyfileobj(included, uber)
             else:
                 uber.write(line)
+
+shutil.copy2('dart-uber.spec', 'scratch/dart-uber.spec')
