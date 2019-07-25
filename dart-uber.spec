@@ -540,11 +540,15 @@ install -Dm 755 out/ProductX64/libdart_jit.so %{buildroot}%{_libdir}
 rm %{buildroot}%{dart_path}/{README,LICENSE}
 rm %{buildroot}%{dart_path}/lib/api_readme.md
 
+# Create symlinks to the binaries.
 for exe in %{buildroot}%{dart_path}/bin/*; do
   test -f $exe || continue
   name=${exe##*/}
-  ln -s %{_bindir}/$name %{buildroot}%{_bindir}/$name
+  ln -s %{dart_path}/bin/$name %{buildroot}%{_bindir}/$name
 done
+
+# Fix the permissions on the snapshot directories & children to be world-readable.
+find %{buildroot}%{dart_path}/bin -mindepth 1 -type d -exec chmod +rx {} \;
 
 %files
 %license LICENSE
