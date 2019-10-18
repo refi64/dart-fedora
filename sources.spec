@@ -1,4 +1,4 @@
-Source0: https://dart.googlesource.com/sdk.git/+archive/2.4.0.tar.gz#/sdk-2.4.0.tar.gz
+Source0: https://dart.googlesource.com/sdk.git/+archive/2.5.2.tar.gz#/sdk-2.5.2.tar.gz
 Source1: https://chromium.googlesource.com/chromium/llvm-project/cfe/tools/clang-format.git/+archive/c09c8deeac31f05bd801995c475e7c8070f9ecda.tar.gz#/sdk_buildtools_clang_format_script-c09c8deeac31f05bd801995c475e7c8070f9ecda.tar.gz
 Source2: https://gn.googlesource.com/gn/+archive/bdb0fd02324b120cacde634a9235405061c8ea06.tar.gz#/sdk_gn-bdb0fd02324b120cacde634a9235405061c8ea06.tar.gz
 Source3: https://dart.googlesource.com/boringssl_gen.git/+archive/bbf52f18f425e29b1185f2f6753bec02ed8c5880.tar.gz#/sdk_third_party_boringssl-bbf52f18f425e29b1185f2f6753bec02ed8c5880.tar.gz

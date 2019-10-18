@@ -4,7 +4,7 @@ from pathlib import Path
 
 import argparse
 import fnmatch
-import importlib
+import importlib.util
 import json
 import platform
 import shutil

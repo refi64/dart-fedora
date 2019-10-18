@@ -1,7 +1,7 @@
 %global dart_path %{_libdir}/dart
 
 Name:    dart
-Version: 2.4.0
+Version: 2.5.2
 Release: 1%{?dist}
 Summary: The Dart Programming Language
 
@@ -45,8 +45,6 @@ This package contains Pub and other tools for Dart language development.
 
 %prep
 %include prep.spec
-
-sed -i 's/sys.stderr.write(str(inst))/raise/' tools/make_version.py
 
 # Auto-detect the architecture.
 sed -i "s/default='x64'/default=HOST_ARCH/" tools/gn.py
